@@ -18,8 +18,12 @@ def ssl_expiry_date(hostname):
     return dt.datetime.strptime(ssl_info['notAfter'], ssl_date_fmt)
 
 
+def days_between(date_one, date_two):
+    return (date_two - date_one).days
+
+
 def days_until(a_datetime):
-    return (a_datetime - dt.datetime.utcnow()).days
+    return days_between(dt.datetime.utcnow(), a_datetime)
 
 
 def days_until_ssl_expiry(hostname):
