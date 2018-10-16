@@ -2,12 +2,15 @@ import os
 
 from flask import (
     abort,
+    escape,
     Flask,
     jsonify,
     request,
 )
 from flask_cors import CORS
 
+from backend.database import db_session
+from backend.models import DomainName
 from ssl_checker.ssl_checker import days_until_ssl_expiry
 
 
@@ -35,5 +38,10 @@ def create_app():
             days_until_ssl_expiry=days_left,
             action_needed=take_action,
         )
+
+    @app.route('/domain-names')
+    def domain_names():
+        all_domain_names = db_session.query(DomainName).all()
+        return escape(str(all_domain_names))
 
     return app
