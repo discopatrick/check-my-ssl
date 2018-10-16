@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import './URLForm.css';
 
 class URLForm extends Component {
   constructor(props) {
@@ -38,13 +39,12 @@ class URLForm extends Component {
 
   render() {
     return (
-      <div>
+      <div className="URLForm">
         <form onSubmit={this.handleSubmit}>
           <label>
-            URL:
-            <input type="text" value={this.state.value} onChange={this.handleChange} />
+            https://<input type="text" value={this.state.value} onChange={this.handleChange} />
           </label>
-          <input type="submit" value="Submit" />
+          <input type="submit" value="Check" />
         </form>
         <p>Days until SSL expiry: {this.state.daysUntilSSLExpiry}</p>
       </div>

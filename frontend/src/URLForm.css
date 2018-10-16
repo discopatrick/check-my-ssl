@@ -1,0 +1,19 @@
+.URLForm {
+  align-items: center;
+}
+
+.URLForm input {
+  font: inherit;
+  margin: 20px;
+}
+
+.URLForm input[type=text] {
+  width: 60%;
+  margin-left: 0;
+}
+
+.URLForm input[type=submit] {
+  -webkit-appearance: button;
+  display: block;
+  margin: auto;
+}
