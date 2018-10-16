@@ -18,7 +18,11 @@ class URLForm extends Component {
   }
 
   handleSubmit(event) {
-    fetch("http://localhost:5000/check-ssl")
+    fetch('http://localhost:5000/check-ssl', {
+      method: 'POST',
+      body: JSON.stringify({url: this.state.value}),
+      headers: {'Content-Type': 'application/json'}
+    })
       .then(res => res.json())
       .then(
         (result) => {
