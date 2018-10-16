@@ -29,10 +29,11 @@ def create_app():
         app.logger.info(f'Checking SSL for url: {url}')
 
         days_left = days_until_ssl_expiry(url)
+        take_action = days_left <= 28
 
         return jsonify(
             days_until_ssl_expiry=days_left,
-            action_needed=True,
+            action_needed=take_action,
         )
 
     return app
