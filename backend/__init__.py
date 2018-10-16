@@ -8,6 +8,8 @@ from flask import (
 )
 from flask_cors import CORS
 
+from ssl_checker.check_my_ssl import days_until_ssl_expiry
+
 
 def create_app():
     app = Flask(__name__)
@@ -26,8 +28,10 @@ def create_app():
 
         app.logger.info(f'Checking SSL for url: {url}')
 
+        days_left = days_until_ssl_expiry(url)
+
         return jsonify(
-            days_until_ssl_expiry=10,
+            days_until_ssl_expiry=days_left,
             action_needed=True,
         )
 
