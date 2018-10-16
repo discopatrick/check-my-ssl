@@ -8,7 +8,7 @@ from flask import (
 )
 from flask_cors import CORS
 
-from ssl_checker.check_my_ssl import days_until_ssl_expiry
+from ssl_checker.ssl_checker import days_until_ssl_expiry
 
 
 def create_app():
