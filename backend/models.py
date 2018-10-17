@@ -14,3 +14,6 @@ class DomainName(Base):
 
     def __str__(self):
         return f'<DomainName "{self.domain_name}">'
+
+    def __repr__(self):
+        return f'<DomainName "{self.domain_name}">'
