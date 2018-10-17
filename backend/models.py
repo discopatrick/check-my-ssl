@@ -9,7 +9,7 @@ class DomainName(Base):
     id = Column(Integer, primary_key=True)
     domain_name = Column(String(255))
 
-    def __init__(self, domain_name=None):
+    def __init__(self, domain_name):
         self.domain_name = domain_name
 
     def __str__(self):
