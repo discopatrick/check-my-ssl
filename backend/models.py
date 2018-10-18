@@ -30,7 +30,7 @@ class SSLCheck(Base):
         return f'<SSLCheck domain_name="{self.domain_name}", checked_at="{self.checked_at}">'
 
     def __repr__(self):
-        self.__str__()
+        return self.__str__()
 
 
 class DomainName(Base):
@@ -47,4 +47,4 @@ class DomainName(Base):
         return f'<DomainName "{self.domain_name}">'
 
     def __repr__(self):
-        self.__str__()
+        return self.__str__()
