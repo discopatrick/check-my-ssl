@@ -15,7 +15,7 @@ services:
       - NODE_ENV=development
 
   flask:
-    command: flask run --host=0.0.0.0
+    command: backend/wait-for-it db:5432 --timeout=30 -- flask run --host=0.0.0.0
     build:
       context: .
       dockerfile: Dockerfile.flask

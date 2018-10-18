@@ -14,9 +14,18 @@ from backend.models import DomainName
 from ssl_checker.ssl_checker import days_until_ssl_expiry
 
 
+def init_db():
+    import backend.models
+    from backend.models import Base
+    from backend.database import engine
+    Base.metadata.create_all(bind=engine)
+
+
 def create_app():
     app = Flask(__name__)
     CORS(app)
+
+    init_db()
 
     @app.route('/hello')
     def hello():
