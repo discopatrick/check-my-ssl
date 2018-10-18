@@ -13,3 +13,14 @@ services:
       - '3000:3000'
     environment:
       - NODE_ENV=development
+
+  flask:
+    command: flask run --host=0.0.0.0
+    build:
+      context: .
+      dockerfile: Dockerfile.flask
+    ports:
+      - '5000:5000'
+    environment:
+      - FLASK_APP=backend
+      - FLASK_ENV=development
