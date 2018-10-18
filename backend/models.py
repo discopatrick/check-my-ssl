@@ -37,7 +37,7 @@ class DomainName(Base):
     __tablename__ = 'domain_names'
 
     id = Column(Integer, primary_key=True)
-    domain_name = Column(String(255))
+    domain_name = Column(String(255), unique=True)
     ssl_checks = relationship('SSLCheck', back_populates='domain_name')
 
     def __init__(self, domain_name):
