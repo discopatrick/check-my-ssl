@@ -19,3 +19,10 @@ def days_until_ssl_expiry_job(hostname):
     domain_name = get_or_create(session=db_session, model=DomainName, domain_name=hostname)
     db_session.add(SSLCheck(domain_name=domain_name, days_until_ssl_expiry=days_left))
     db_session.commit()
+
+
+@dramatiq.actor
+def check_ssl_for_all_domain_names():
+    all_domain_names = db_session.query(DomainName).all()
+    for dn in all_domain_names:
+        days_until_ssl_expiry_job.send(dn.domain_name)
