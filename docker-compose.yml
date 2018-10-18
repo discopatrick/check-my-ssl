@@ -30,6 +30,8 @@ services:
 
   db:
     image: postgres:10
+    volumes:
+      - 'db:/var/lib/postgresql/data'
 
   broker:
     image: rabbitmq:3
@@ -52,3 +54,6 @@ services:
     volumes:
       - './backend:/app/backend'
       - './ssl_checker:/app/ssl_checker'
+
+volumes:
+  db: {}
