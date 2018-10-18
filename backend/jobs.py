@@ -1,10 +1,14 @@
 from socket import gaierror
 
 import dramatiq
+from dramatiq.brokers.rabbitmq import RabbitmqBroker
 
 from backend.database import db_session
 from backend.models import DomainName, get_or_create, SSLCheck
 from ssl_checker.ssl_checker import days_until_ssl_expiry
+
+rabbitmq_broker = RabbitmqBroker(host='broker')
+dramatiq.set_broker(rabbitmq_broker)
 
 
 @dramatiq.actor

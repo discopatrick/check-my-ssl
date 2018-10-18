@@ -30,3 +30,16 @@ services:
 
   db:
     image: postgres:10
+
+  broker:
+    image: rabbitmq:3
+    hostname: broker
+
+  tasks:
+    command: backend/wait-for-it broker:5672 --timeout=30 -- dramatiq backend.jobs --watch .
+    build:
+      context: .
+      dockerfile: Dockerfile.flask
+    volumes:
+      - './backend:/app/backend'
+      - './ssl_checker:/app/ssl_checker'
