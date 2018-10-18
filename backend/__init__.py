@@ -44,4 +44,8 @@ def create_app():
         all_domain_names = db_session.query(DomainName).all()
         return escape(str(all_domain_names))
 
+    @app.teardown_appcontext
+    def shutdown_session(exception=None):
+        db_session.remove()
+
     return app
