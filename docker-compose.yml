@@ -43,3 +43,12 @@ services:
     volumes:
       - './backend:/app/backend'
       - './ssl_checker:/app/ssl_checker'
+
+  scheduler:
+    command: backend/wait-for-it broker:5672 --timeout=30 -- python -m backend.scheduler
+    build:
+      context: .
+      dockerfile: Dockerfile.flask
+    volumes:
+      - './backend:/app/backend'
+      - './ssl_checker:/app/ssl_checker'
