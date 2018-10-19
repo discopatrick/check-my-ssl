@@ -1,3 +1,3 @@
 # check-my-ssl
 
-Tests: `python -m pytest`
+Tests: `docker-compose run --rm flask python -m pytest`
