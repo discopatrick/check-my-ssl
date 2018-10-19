@@ -1,3 +1,4 @@
+from logging.config import dictConfig
 import os
 
 from flask import (
@@ -12,6 +13,26 @@ from flask_cors import CORS
 from backend.database import db_session
 from backend.models import DomainName
 from ssl_checker.ssl_checker import days_until_ssl_expiry
+
+dictConfig({
+    'version': 1,
+    'formatters': {
+        'default': {
+            'format': '[%(asctime)s] %(levelname)s in %(module)s: %(message)s',
+        }
+    },
+    'handlers': {
+        'wsgi': {
+            'class': 'logging.StreamHandler',
+            'stream': 'ext://flask.logging.wsgi_errors_stream',
+            'formatter': 'default',
+        }
+    },
+    'root': {
+        'level': 'INFO',
+        'handlers': ['wsgi'],
+    },
+})
 
 
 def init_db():
