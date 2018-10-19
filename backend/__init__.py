@@ -71,6 +71,7 @@ def create_app():
 
     @app.route('/domain-names')
     def domain_names():
+        app.logger.info(f'Listing all domain names')
         all_domain_names = db_session.query(DomainName).all()
         return escape(str(all_domain_names))
 
