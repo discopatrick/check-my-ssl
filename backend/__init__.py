@@ -19,18 +19,31 @@ dictConfig({
     'formatters': {
         'default': {
             'format': '[%(asctime)s] %(levelname)s in %(module)s: %(message)s',
-        }
+        },
+        'logzioFormat': {
+            # 'format': '{"additional_field": "value"}',
+        },
     },
     'handlers': {
         'wsgi': {
             'class': 'logging.StreamHandler',
             'stream': 'ext://flask.logging.wsgi_errors_stream',
             'formatter': 'default',
-        }
+        },
+        'logzio': {
+            'class': 'logzio.handler.LogzioHandler',
+            'level': 'INFO',
+            'formatter': 'logzioFormat',
+            'token': 'REPLACE_ME',
+            'logzio_type': "python",
+            'logs_drain_timeout': 5,
+            'url': 'https://listener.logz.io:8071',
+            'debug': True,
+        },
     },
     'root': {
         'level': 'INFO',
-        'handlers': ['wsgi'],
+        'handlers': ['wsgi', 'logzio'],
     },
 })
 
