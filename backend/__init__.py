@@ -34,7 +34,7 @@ dictConfig({
             'class': 'logzio.handler.LogzioHandler',
             'level': 'INFO',
             'formatter': 'logzioFormat',
-            'token': 'REPLACE_ME',
+            'token': os.environ['LOGZIO_TOKEN'],
             'logzio_type': "python",
             'logs_drain_timeout': 5,
             'url': 'https://listener.logz.io:8071',

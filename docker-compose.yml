@@ -27,6 +27,8 @@ services:
     environment:
       - FLASK_APP=backend
       - FLASK_ENV=development
+    env_file:
+      - env/secret/development.env
 
   db:
     image: postgres:10
@@ -45,6 +47,8 @@ services:
     volumes:
       - './backend:/app/backend'
       - './ssl_checker:/app/ssl_checker'
+    env_file:
+      - env/secret/development.env
 
   scheduler:
     command: backend/wait-for-it broker:5672 --timeout=30 -- python -m backend.scheduler
