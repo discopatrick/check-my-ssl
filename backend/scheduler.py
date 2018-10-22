@@ -1,4 +1,5 @@
 import dramatiq
+import os
 import sys
 
 from apscheduler.schedulers.blocking import BlockingScheduler
@@ -13,7 +14,7 @@ if __name__ == "__main__":
     scheduler = BlockingScheduler()
     scheduler.add_job(
         func=check_ssl_for_all_domain_names.send,
-        trigger=CronTrigger.from_crontab("* * * * *"),
+        trigger=CronTrigger.from_crontab(os.environ['CHECK_CRON_SCHEDULE']),
     )
     try:
         scheduler.start()
