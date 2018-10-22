@@ -19,7 +19,7 @@ class URLForm extends Component {
   }
 
   handleSubmit(event) {
-    fetch('http://localhost:5000/check-ssl', {
+    fetch(process.env.REACT_APP_BACKEND_BASE_URL + '/check-ssl', {
       method: 'POST',
       body: JSON.stringify({url: this.state.value}),
       headers: {'Content-Type': 'application/json'}
