@@ -18,8 +18,8 @@ services:
       - './frontend:/usr/src/app'
       - '/usr/src/app/node_modules'
     env_file:
-      - env/development.env
-      - env/secret/development.env
+      - env/development/.env
+      - env/development/.env.secret
 
   flask:
     command: backend/wait-for-it db:5432 --timeout=30 -- flask run --host=0.0.0.0
@@ -30,8 +30,8 @@ services:
       - './backend:/app/backend'
       - './ssl_checker:/app/ssl_checker'
     env_file:
-      - env/development.env
-      - env/secret/development.env
+      - env/development/.env
+      - env/development/.env.secret
 
   db:
     image: postgres:10
@@ -51,8 +51,8 @@ services:
       - './backend:/app/backend'
       - './ssl_checker:/app/ssl_checker'
     env_file:
-      - env/development.env
-      - env/secret/development.env
+      - env/development/.env
+      - env/development/.env.secret
 
   scheduler:
     command: backend/wait-for-it broker:5672 --timeout=30 -- python -m backend.scheduler
@@ -63,8 +63,8 @@ services:
       - './backend:/app/backend'
       - './ssl_checker:/app/ssl_checker'
     env_file:
-      - env/development.env
-      - env/secret/development.env
+      - env/development/.env
+      - env/development/.env.secret
 
 volumes:
   db: {}

@@ -24,23 +24,23 @@ services:
 
   frontend:
     env_file:
-      - env/production.env
-      - env/secret/production.env
+      - env/production/.env
+      - env/production/.env.secret
 
   flask:
     env_file:
-      - env/production.env
-      - env/secret/production.env
+      - env/production/.env
+      - env/production/.env.secret
 
   tasks:
     env_file:
-      - env/production.env
-      - env/secret/production.env
+      - env/production/.env
+      - env/production/.env.secret
 
   scheduler:
     env_file:
-      - env/production.env
-      - env/secret/production.env
+      - env/production/.env
+      - env/production/.env.secret
 
 volumes:
   letsencrypt-etc: {}
