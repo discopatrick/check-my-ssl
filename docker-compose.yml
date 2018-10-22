@@ -11,8 +11,9 @@ services:
       - '/usr/src/app/node_modules'
     ports:
       - '3000:3000'
-    environment:
-      - NODE_ENV=development
+    env_file:
+      - env/development.env
+      - env/secret/development.env
 
   flask:
     command: backend/wait-for-it db:5432 --timeout=30 -- flask run --host=0.0.0.0
@@ -24,9 +25,6 @@ services:
       - './ssl_checker:/app/ssl_checker'
     ports:
       - '5000:5000'
-    environment:
-      - FLASK_APP=backend
-      - FLASK_ENV=development
     env_file:
       - env/development.env
       - env/secret/development.env
