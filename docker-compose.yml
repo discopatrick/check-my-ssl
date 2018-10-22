@@ -13,7 +13,7 @@ services:
   frontend:
     build:
       context: .
-      dockerfile: Dockerfile.frontend
+      dockerfile: ./docker/Dockerfile.frontend
     volumes:
       - './frontend:/usr/src/app'
       - '/usr/src/app/node_modules'
@@ -25,7 +25,7 @@ services:
     command: backend/wait-for-it db:5432 --timeout=30 -- flask run --host=0.0.0.0
     build:
       context: .
-      dockerfile: Dockerfile.flask
+      dockerfile: ./docker/Dockerfile.flask
     volumes:
       - './backend:/app/backend'
       - './ssl_checker:/app/ssl_checker'
@@ -46,7 +46,7 @@ services:
     command: backend/wait-for-it broker:5672 --timeout=30 -- dramatiq backend.jobs --watch .
     build:
       context: .
-      dockerfile: Dockerfile.flask
+      dockerfile: ./docker/Dockerfile.flask
     volumes:
       - './backend:/app/backend'
       - './ssl_checker:/app/ssl_checker'
@@ -58,7 +58,7 @@ services:
     command: backend/wait-for-it broker:5672 --timeout=30 -- python -m backend.scheduler
     build:
       context: .
-      dockerfile: Dockerfile.flask
+      dockerfile: ./docker/Dockerfile.flask
     volumes:
       - './backend:/app/backend'
       - './ssl_checker:/app/ssl_checker'
