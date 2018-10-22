@@ -17,6 +17,9 @@ from ssl_checker.ssl_checker import days_until_ssl_expiry
 
 sentry_sdk.init(dsn=os.environ['SENTRY_DSN'])
 
+ENV = os.environ['ENV']
+LOGZIO_FORMAT = '{"env": "' + ENV + '"}'
+
 dictConfig({
     'version': 1,
     'formatters': {
@@ -24,7 +27,7 @@ dictConfig({
             'format': '[%(asctime)s] %(levelname)s in %(module)s: %(message)s',
         },
         'logzioFormat': {
-            # 'format': '{"additional_field": "value"}',
+            'format': LOGZIO_FORMAT,
         },
     },
     'handlers': {
