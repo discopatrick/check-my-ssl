@@ -58,6 +58,8 @@ services:
     volumes:
       - './backend:/app/backend'
       - './ssl_checker:/app/ssl_checker'
+    env_file:
+      - env/secret/development.env
 
 volumes:
   db: {}

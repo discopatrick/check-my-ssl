@@ -9,10 +9,13 @@ from flask import (
     request,
 )
 from flask_cors import CORS
+import sentry_sdk
 
 from backend.database import db_session
 from backend.models import DomainName
 from ssl_checker.ssl_checker import days_until_ssl_expiry
+
+sentry_sdk.init(dsn=os.environ['SENTRY_DSN'])
 
 dictConfig({
     'version': 1,
