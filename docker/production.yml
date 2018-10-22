@@ -2,6 +2,9 @@ version: '3'
 
 services:
 
+  proxy:
+    command: [nginx, '-g', 'daemon off;']
+
   frontend:
     env_file:
       - env/production.env
