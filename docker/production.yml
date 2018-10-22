@@ -1,0 +1,23 @@
+version: '3'
+
+services:
+
+  frontend:
+    env_file:
+      - env/production.env
+      - env/secret/production.env
+
+  flask:
+    env_file:
+      - env/production.env
+      - env/secret/production.env
+
+  tasks:
+    env_file:
+      - env/production.env
+      - env/secret/production.env
+
+  scheduler:
+    env_file:
+      - env/production.env
+      - env/secret/production.env
