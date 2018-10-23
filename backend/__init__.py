@@ -3,7 +3,6 @@ import os
 
 from flask import (
     abort,
-    escape,
     Flask,
     jsonify,
     request,
@@ -92,7 +91,7 @@ def create_app():
     def domain_names():
         app.logger.info(f'Listing all domain names')
         all_domain_names = db_session.query(DomainName).all()
-        return escape(str(all_domain_names))
+        return jsonify(domain_names=[dn.domain_name for dn in all_domain_names])
 
     @app.teardown_appcontext
     def shutdown_session(exception=None):
