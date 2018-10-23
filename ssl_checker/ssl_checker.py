@@ -4,17 +4,20 @@ import socket, ssl
 SSL_DATE_FMT = r'%b %d %H:%M:%S %Y %Z'
 
 
-def ssl_expiry_date(hostname):
+def connection(hostname, timeout=3.0):
     context = ssl.create_default_context()
     conn = context.wrap_socket(
         socket.socket(socket.AF_INET),
         server_hostname=hostname,
     )
-    conn.settimeout(3.0)
-
+    conn.settimeout(timeout)
     conn.connect((hostname, 443))
-    ssl_info = conn.getpeercert()
+    return conn
 
+
+def ssl_expiry_date(hostname):
+    conn = connection(hostname)
+    ssl_info = conn.getpeercert()
     return dt.datetime.strptime(ssl_info['notAfter'], SSL_DATE_FMT)
 
 
