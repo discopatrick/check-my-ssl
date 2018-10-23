@@ -1,10 +1,10 @@
 import datetime as dt
 import socket, ssl
 
+SSL_DATE_FMT = r'%b %d %H:%M:%S %Y %Z'
+
 
 def ssl_expiry_date(hostname):
-    ssl_date_fmt = r'%b %d %H:%M:%S %Y %Z'
-
     context = ssl.create_default_context()
     conn = context.wrap_socket(
         socket.socket(socket.AF_INET),
@@ -15,7 +15,7 @@ def ssl_expiry_date(hostname):
     conn.connect((hostname, 443))
     ssl_info = conn.getpeercert()
 
-    return dt.datetime.strptime(ssl_info['notAfter'], ssl_date_fmt)
+    return dt.datetime.strptime(ssl_info['notAfter'], SSL_DATE_FMT)
 
 
 def days_between(date_one, date_two):
