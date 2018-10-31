@@ -22,7 +22,7 @@ services:
       - env/development/.env.secret
 
   flask:
-    command: backend/wait-for-it db:5432 --timeout=30 -- flask run --host=0.0.0.0
+    command: wait-for-it db:5432 --timeout=30 -- flask run --host=0.0.0.0
     build:
       context: .
       dockerfile: ./docker/Dockerfile.flask
@@ -43,7 +43,7 @@ services:
     hostname: broker
 
   tasks:
-    command: backend/wait-for-it broker:5672 --timeout=30 -- dramatiq backend.jobs --watch .
+    command: wait-for-it broker:5672 --timeout=30 -- dramatiq web.jobs --watch .
     build:
       context: .
       dockerfile: ./docker/Dockerfile.flask
@@ -55,7 +55,7 @@ services:
       - env/development/.env.secret
 
   scheduler:
-    command: backend/wait-for-it broker:5672 --timeout=30 -- python -m backend.scheduler
+    command: wait-for-it broker:5672 --timeout=30 -- python -m web.scheduler
     build:
       context: .
       dockerfile: ./docker/Dockerfile.flask
