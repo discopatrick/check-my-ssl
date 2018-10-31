@@ -1,7 +1,9 @@
 FROM python:3.7
 
+WORKDIR /root
+
 RUN mkdir /app
-WORKDIR /app
+
 COPY backend/wait-for-it /usr/local/bin
 
 COPY backend/requirements.txt /app/backend/requirements.txt
@@ -10,3 +12,5 @@ RUN pip install -r /app/backend/requirements.txt -r /app/ssl_checker/requirement
 
 COPY backend /app/backend
 COPY ssl_checker /app/ssl_checker
+
+RUN pip install --editable /app/backend/web

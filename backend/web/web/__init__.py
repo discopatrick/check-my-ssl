@@ -10,8 +10,8 @@ from flask import (
 from flask_cors import CORS
 import sentry_sdk
 
-from backend.database import db_session
-from backend.models import DomainName
+from web.database import db_session
+from web.models import DomainName
 from ssl_checker.ssl_checker import days_until_ssl_expiry
 
 sentry_sdk.init(dsn=os.environ['SENTRY_DSN'])
@@ -54,9 +54,9 @@ dictConfig({
 
 
 def init_db():
-    import backend.models
-    from backend.models import Base
-    from backend.database import engine
+    import web.models
+    from web.models import Base
+    from web.database import engine
     Base.metadata.create_all(bind=engine)
 
 
