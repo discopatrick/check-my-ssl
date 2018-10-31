@@ -21,7 +21,7 @@ services:
       - env/development/.env
       - env/development/.env.secret
 
-  flask:
+  app:
     command: wait-for-it db:5432 --timeout=30 -- flask run --host=0.0.0.0
     build:
       context: .
