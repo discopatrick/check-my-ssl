@@ -5,7 +5,7 @@ WORKDIR /usr/src/app
 
 ENV PATH /usr/src/app/node_modules/.bin:$PATH
 
-COPY frontend/package.json /usr/src/app/package.json
+COPY frontend/package.json frontend/yarn.lock /usr/src/app/
 RUN yarn install
 
 COPY frontend/ /usr/src/app
