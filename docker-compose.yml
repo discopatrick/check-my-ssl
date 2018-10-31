@@ -28,7 +28,6 @@ services:
       dockerfile: ./docker/Dockerfile.backend
     volumes:
       - './backend:/app/backend'
-      - './ssl_checker:/app/ssl_checker'
     env_file:
       - env/development/.env
       - env/development/.env.secret
@@ -49,7 +48,6 @@ services:
       dockerfile: ./docker/Dockerfile.backend
     volumes:
       - './backend:/app/backend'
-      - './ssl_checker:/app/ssl_checker'
     env_file:
       - env/development/.env
       - env/development/.env.secret
@@ -61,7 +59,6 @@ services:
       dockerfile: ./docker/Dockerfile.backend
     volumes:
       - './backend:/app/backend'
-      - './ssl_checker:/app/ssl_checker'
     env_file:
       - env/development/.env
       - env/development/.env.secret
