@@ -12,7 +12,7 @@ import sentry_sdk
 
 from web.database import db_session
 from web.models import DomainName
-from ssl_checker.ssl_checker import days_until_ssl_expiry
+from ssl_checker import days_until_ssl_expiry
 
 sentry_sdk.init(dsn=os.environ['SENTRY_DSN'])
 

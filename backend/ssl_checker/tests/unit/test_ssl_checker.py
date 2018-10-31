@@ -1,6 +1,6 @@
 import datetime as dt
 
-from ssl_checker.ssl_checker import days_between
+from ssl_checker import days_between
 
 
 def test_days_between():

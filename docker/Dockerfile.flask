@@ -7,10 +7,9 @@ RUN mkdir /app
 COPY backend/wait-for-it /usr/local/bin
 
 COPY backend/requirements.txt /app/backend/requirements.txt
-COPY ssl_checker/requirements.txt /app/ssl_checker/requirements.txt
-RUN pip install -r /app/backend/requirements.txt -r /app/ssl_checker/requirements.txt
+RUN pip install -r /app/backend/requirements.txt
 
 COPY backend /app/backend
-COPY ssl_checker /app/ssl_checker
 
 RUN pip install --editable /app/backend/web
+RUN pip install --editable /app/backend/ssl_checker
