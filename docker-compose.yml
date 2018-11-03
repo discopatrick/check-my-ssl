@@ -9,6 +9,9 @@ services:
       - "80:80"
     volumes:
       - "./env/development/nginx.conf:/etc/nginx/conf.d/default.conf"
+    depends_on:
+      - app
+      - frontend
 
   frontend:
     build:
@@ -31,6 +34,8 @@ services:
     env_file:
       - env/development/.env
       - env/development/.env.secret
+    depends_on:
+      - db
 
   db:
     image: postgres:10
@@ -51,6 +56,8 @@ services:
     env_file:
       - env/development/.env
       - env/development/.env.secret
+    depends_on:
+      - broker
 
   scheduler:
     command: wait-for-it broker:5672 --timeout=30 -- python -m web.scheduler
@@ -62,6 +69,8 @@ services:
     env_file:
       - env/development/.env
       - env/development/.env.secret
+    depends_on:
+      - broker
 
 volumes:
   db: {}
