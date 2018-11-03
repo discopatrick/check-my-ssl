@@ -18,12 +18,20 @@ class URLForm extends Component {
     this.setState({value: event.target.value});
   }
 
+  handleErrors(response) {
+    if (!response.ok) {
+        throw Error(response.statusText);
+    }
+    return response;
+  }
+
   handleSubmit(event) {
     fetch(process.env.REACT_APP_BACKEND_BASE_URL + '/check-ssl', {
       method: 'POST',
       body: JSON.stringify({url: this.state.value}),
       headers: {'Content-Type': 'application/json'}
     })
+      .then(this.handleErrors)
       .then(res => res.json())
       .then(
         (result) => {
@@ -34,6 +42,7 @@ class URLForm extends Component {
           })
         }
       )
+      .catch(error => alert(error));
     event.preventDefault();
   }
 
