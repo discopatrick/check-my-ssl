@@ -12,6 +12,7 @@ import sentry_sdk
 
 from web.database import db_session
 from web.models import DomainName
+from web.version import version
 from ssl_checker import days_until_ssl_expiry
 
 sentry_sdk.init(dsn=os.environ['SENTRY_DSN'])
@@ -92,6 +93,10 @@ def create_app():
         app.logger.info(f'Listing all domain names')
         all_domain_names = db_session.query(DomainName).all()
         return jsonify(domain_names=[dn.domain_name for dn in all_domain_names])
+
+    @app.route('/backend-version')
+    def backend_version():
+        return jsonify(backend_version=version(app.root_path))
 
     @app.teardown_appcontext
     def shutdown_session(exception=None):
