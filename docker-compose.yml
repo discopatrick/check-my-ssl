@@ -72,5 +72,14 @@ services:
     depends_on:
       - broker
 
+  acceptance:
+    command: bash -c 'cd /app && behave'
+    build:
+      context: .
+      dockerfile: ./docker/Dockerfile.backend
+    volumes:
+      - './backend:/app/backend'
+      - './features:/app/features'
+
 volumes:
   db: {}
