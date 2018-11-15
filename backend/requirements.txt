@@ -9,4 +9,5 @@ sentry-sdk==0.4.3
 SQLAlchemy==1.2.12
 
 # development
+behave==1.2.6
 pytest==3.8.2
