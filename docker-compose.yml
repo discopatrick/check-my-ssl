@@ -22,7 +22,7 @@ services:
       - '/usr/src/app/node_modules'
     env_file:
       - env/development/.env
-      - env/development/.env.secret
+      # - env/development/.env.secret
 
   app:
     command: wait-for-it db:5432 --timeout=30 -- flask run --host=0.0.0.0
@@ -33,7 +33,7 @@ services:
       - './backend:/app/backend'
     env_file:
       - env/development/.env
-      - env/development/.env.secret
+      # - env/development/.env.secret
     depends_on:
       - db
 
@@ -55,7 +55,7 @@ services:
       - './backend:/app/backend'
     env_file:
       - env/development/.env
-      - env/development/.env.secret
+      # - env/development/.env.secret
     depends_on:
       - broker
 
@@ -68,7 +68,7 @@ services:
       - './backend:/app/backend'
     env_file:
       - env/development/.env
-      - env/development/.env.secret
+      # - env/development/.env.secret
     depends_on:
       - broker
 
