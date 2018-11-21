@@ -1,4 +1,5 @@
 import datetime as dt
+import logging
 
 from sqlalchemy import (
     Column,
@@ -12,6 +13,8 @@ from sqlalchemy.ext.declarative import declarative_base
 
 Base = declarative_base()
 
+LOG = logging.getLogger(__name__)
+
 
 class SSLCheck(Base):
     __tablename__ = 'ssl_checks'
@@ -23,6 +26,7 @@ class SSLCheck(Base):
     domain_name = relationship('DomainName', back_populates='ssl_checks')
 
     def __init__(self, domain_name, days_until_ssl_expiry):
+        LOG.info('SSLCheck __init__')
         self.domain_name = domain_name
         self.days_until_ssl_expiry = days_until_ssl_expiry
 
@@ -41,6 +45,7 @@ class DomainName(Base):
     ssl_checks = relationship('SSLCheck', back_populates='domain_name')
 
     def __init__(self, domain_name):
+        LOG.info('DomainName __init__')
         self.domain_name = domain_name
 
     def __str__(self):
