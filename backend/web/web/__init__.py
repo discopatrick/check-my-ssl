@@ -6,16 +6,16 @@ from flask import (
 )
 from flask_cors import CORS
 
-from web.database import db_session
+from persistence.database import db_session
 import web.logging_config
-from web.models import DomainName
+from persistence.models import DomainName
 from ssl_checker import days_until_ssl_expiry
 
 
 def init_db():
-    import web.models
-    from web.models import Base
-    from web.database import engine
+    import persistence.models
+    from persistence.models import Base
+    from persistence.database import engine
     Base.metadata.create_all(bind=engine)
 
 

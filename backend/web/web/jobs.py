@@ -4,8 +4,8 @@ from socket import gaierror
 import dramatiq
 from dramatiq.brokers.rabbitmq import RabbitmqBroker
 
-from web.database import db_session
-from web.models import DomainName, get_or_create, SSLCheck
+from persistence.database import db_session
+from persistence.models import DomainName, get_or_create, SSLCheck
 from ssl_checker import days_until_ssl_expiry
 
 rabbitmq_broker = RabbitmqBroker(host='broker')
