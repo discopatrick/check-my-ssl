@@ -5,7 +5,7 @@ Flask==1.0.2
 Flask-Cors==3.0.6
 logzio-python-handler==2.0.11
 psycopg2-binary==2.7.5
-sentry-sdk==0.4.3
+sentry-sdk[flask]==0.5.5
 SQLAlchemy==1.2.12
 
 # development

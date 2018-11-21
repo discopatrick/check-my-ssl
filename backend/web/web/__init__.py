@@ -55,6 +55,12 @@ def create_app():
         all_domain_names = db_session.query(DomainName).all()
         return jsonify(domain_names=[dn.domain_name for dn in all_domain_names])
 
+
+    @app.route('/invoke-exception')
+    def invoke_exception():
+        funky = 1 / 0
+
+
     @app.teardown_appcontext
     def shutdown_session(exception=None):
         db_session.remove()
