@@ -6,8 +6,8 @@ from flask import (
 )
 from flask_cors import CORS
 
+import common.logging_config
 from persistence.database import db_session
-import web.logging_config
 from persistence.models import DomainName
 from ssl_checker import days_until_ssl_expiry
 
