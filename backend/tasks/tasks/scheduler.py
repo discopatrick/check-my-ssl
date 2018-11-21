@@ -5,7 +5,7 @@ import sys
 from apscheduler.schedulers.blocking import BlockingScheduler
 from apscheduler.triggers.cron import CronTrigger
 
-from web.jobs import check_ssl_for_all_domain_names
+from tasks.jobs import check_ssl_for_all_domain_names
 
 from datetime import datetime
 

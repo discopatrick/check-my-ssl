@@ -14,3 +14,4 @@ COPY backend /app/backend
 RUN pip install --editable /app/backend/web
 RUN pip install --editable /app/backend/ssl_checker
 RUN pip install --editable /app/backend/persistence
+RUN pip install --editable /app/backend/tasks
