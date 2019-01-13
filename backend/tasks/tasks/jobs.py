@@ -1,16 +1,20 @@
 import logging
+import os
 from socket import gaierror
 
 import dramatiq
 from dramatiq.brokers.rabbitmq import RabbitmqBroker
+import sentry_sdk
 
 from persistence.database import db_session
 from persistence.models import DomainName, get_or_create, SSLCheck
 from ssl_checker import days_until_ssl_expiry
+from tasks.middleware import SentryMiddleware
 
 rabbitmq_broker = RabbitmqBroker(host='broker')
 dramatiq.set_broker(rabbitmq_broker)
-
+sentry_sdk.init(dsn=os.environ['SENTRY_DSN'])
+rabbitmq_broker.add_middleware(SentryMiddleware(sentry_sdk.capture_exception))
 LOG = logging.getLogger(__name__)
 
 
@@ -37,3 +41,9 @@ def check_ssl_for_all_domain_names():
     all_domain_names = db_session.query(DomainName).all()
     for dn in all_domain_names:
         days_until_ssl_expiry_job.send(dn.domain_name)
+
+
+@dramatiq.actor(max_retries=0)
+def invoke_exception_task():
+    LOG.info('Running the invoke_exception_task')
+    funky = 1 / 0

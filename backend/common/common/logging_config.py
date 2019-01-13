@@ -1,13 +1,6 @@
 from logging.config import dictConfig
 import os
 
-import sentry_sdk
-from sentry_sdk.integrations.flask import FlaskIntegration
-
-sentry_sdk.init(
-    dsn=os.environ['SENTRY_DSN'],
-    integrations=[FlaskIntegration()],
-)
 
 ENV = os.environ['ENV']
 LOGZIO_FORMAT = '{"env": "' + ENV + '"}'

@@ -1,3 +1,5 @@
+import os
+
 from flask import (
     abort,
     Flask,
@@ -5,11 +7,18 @@ from flask import (
     request,
 )
 from flask_cors import CORS
+import sentry_sdk
+from sentry_sdk.integrations.flask import FlaskIntegration
 
 import common.logging_config
 from persistence.database import db_session
 from persistence.models import DomainName
 from ssl_checker import days_until_ssl_expiry
+
+sentry_sdk.init(
+    dsn=os.environ['SENTRY_DSN'],
+    integrations=[FlaskIntegration()],
+)
 
 
 def init_db():
@@ -58,6 +67,7 @@ def create_app():
 
     @app.route('/invoke-exception')
     def invoke_exception():
+        app.logger.info('/invoke-exception')
         funky = 1 / 0
 
 
